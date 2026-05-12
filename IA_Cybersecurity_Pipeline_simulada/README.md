@@ -17,17 +17,28 @@ Esta carpeta contiene el **entorno de prueba** del sistema integrado de detecci�
 | `data/incident_data.csv` | 2,000 | Incidentes de seguridad por severidad |
 | `data/user_activity_logs.csv` | 1,035 | Logs de actividad de 5 usuarios |
 
-## Flujo de Trabajo
-Los notebooks deben ejecutarse en orden del **01 al 08**. En esta versión simulada, **cada notebook genera automáticamente los datos que necesita**, por lo que pueden ejecutarse de forma independiente.
+## Ejecución Automática (Recomendado)
+Para verificar que todo el pipeline funciona de una sola vez y generar los resultados:
+```bash
+python ejecutar_pipeline_simulado.py
+```
+Este script ejecutará los 8 notebooks secuencialmente y guardará las versiones con resultados en la carpeta `resultados_ejecucion/`.
+
+## Flujo de Trabajo Manual
+Los notebooks deben ejecutarse en orden del **01 al 08**. 
 
 1. **01_entorno_setup** → Validación de entorno y creación de carpetas.
-2. **02_deteccion_amenazas** → Isolation Forest + Autoencoder sobre tráfico simulado.
+2. **02_deteccion_amenazas** → Isolation Forest + Detección MLP sobre tráfico simulado.
 3. **03_deteccion_malware** → Decision Tree + Random Forest sobre features PE simulados.
 4. **04_respuesta_incidentes** → SVM de triaje sobre incidentes simulados.
 5. **05_analisis_comportamiento** → UBA sobre logs de usuario simulados.
 6. **06_explicabilidad_xai** → SHAP sobre el modelo de malware.
 7. **07_ataques_adversariales** → Ruido adversarial y entrenamiento robusto.
 8. **08_pipeline_integrado** → Orquestación completa + detección de deriva.
+
+## Notas de Compatibilidad
+- **Python 3.14+:** Esta versión del código ha sido adaptada para funcionar sin TensorFlow (usando Scikit-Learn para el Autoencoder) debido a limitaciones de compatibilidad en versiones muy recientes de Python.
+- **XAI:** Se utiliza SHAP para la explicabilidad, optimizado para evitar errores de visualización en entornos de terminal.
 
 ## Regenerar datos simulados
 ```bash

@@ -1,9 +1,14 @@
 numpy
 pandas
 scikit-learn
-tensorflow
-pefile
-shap
 matplotlib
 seaborn
+scipy
 joblib
+imbalanced-learn
+shap
+jupyter
+nbconvert
+ipykernel
+nbformat
+pefile
